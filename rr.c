@@ -1,4 +1,18 @@
-void	rotate_both_of_them(struct lst **a_list, struct lst **b_list)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rr.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/26 18:00:49 by muoz              #+#    #+#             */
+/*   Updated: 2023/12/26 18:00:56 by muoz             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
+void	rotate_both_of_them(t_lst **a_list, t_lst **b_list)
 {
 	rotate_a(&*a_list);
 	rotate_b(&*b_list);

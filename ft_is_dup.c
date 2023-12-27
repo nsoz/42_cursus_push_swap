@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ra.c                                               :+:      :+:    :+:   */
+/*   ft_is_dup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/26 17:59:02 by muoz              #+#    #+#             */
-/*   Updated: 2023/12/27 02:18:52 by muoz             ###   ########.fr       */
+/*   Created: 2023/12/26 23:37:32 by muoz              #+#    #+#             */
+/*   Updated: 2023/12/27 02:05:21 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate_a(t_lst **list)
+int	ft_is_dup(t_lst *list_a)
 {
-	t_lst	*iter;
+	t_lst	*tmp;
 	t_lst	*holder;
 
-	iter = *list;
-	*list = (*list)->next;
-	holder = *list;
-	while (holder -> next != NULL)
-		holder = holder -> next;
-	holder -> next = iter;
-	iter -> next = NULL;
-	write(1, "ra\n", 3);
+	tmp = list_a;
+	while (tmp != NULL)
+	{
+		holder = tmp->next;
+		while (holder != NULL)
+		{
+			if (tmp->data == holder->data)
+				return (1);
+			holder = holder->next;
+		}
+		tmp = tmp->next;
+	}
+	return (0);
 }

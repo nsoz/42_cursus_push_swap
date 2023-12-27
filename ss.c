@@ -1,4 +1,18 @@
-void swap_both_of_them(struct lst *node_a, struct lst *node_b)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ss.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/26 18:02:08 by muoz              #+#    #+#             */
+/*   Updated: 2023/12/27 02:26:25 by muoz             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
+void	swap_both_of_them(t_lst *node_a, t_lst *node_b)
 {
 	if ((node_a -> next != NULL) && (node_b -> next != NULL))
 	{
