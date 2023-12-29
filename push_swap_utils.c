@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/26 18:03:45 by muoz              #+#    #+#             */
-/*   Updated: 2023/12/27 03:14:33 by muoz             ###   ########.fr       */
+/*   Created: 2023/12/29 21:49:10 by muoz              #+#    #+#             */
+/*   Updated: 2023/12/29 21:49:58 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,51 @@ char	**ft_split(char *str, t_lst *list_a)
 	}
 	ret[f] = NULL;
 	return (ret);
+}
+
+int	ft_is_dup(t_lst *list_a)
+{
+	t_lst	*tmp;
+	t_lst	*holder;
+
+	tmp = list_a;
+	while (tmp != NULL)
+	{
+		holder = tmp->next;
+		while (holder != NULL)
+		{
+			if (tmp->data == holder->data)
+				return (1);
+			holder = holder->next;
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+long	ft_atol(char *str, t_lst *list_a, int check, long result)
+{
+	int		sign;
+
+	sign = 1;
+	while ((*str == ' ') || (*str >= 9 && *str <= 13) || (*str == '0'))
+		str++;
+	if (*str == '-')
+		sign = -1;
+	while (*str == '-' || *str == '+')
+	{
+		str++;
+		check++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + *str - '0';
+		str++;
+		if ((result * sign) > 2147483647
+			|| (result * sign) < -2147483648 || check > 1)
+			ft_lst_free(list_a);
+	}
+	if (*str && (*str != ' ' && *str != '	'))
+		ft_lst_free(list_a);
+	return (result * sign);
 }

@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ra.c                                               :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/26 17:59:02 by muoz              #+#    #+#             */
-/*   Updated: 2023/12/27 02:18:52 by muoz             ###   ########.fr       */
+/*   Created: 2023/12/29 22:07:19 by muoz              #+#    #+#             */
+/*   Updated: 2023/12/29 22:23:09 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate_a(t_lst **list)
+void	ft_sort(t_lst *a_list)
 {
-	t_lst	*iter;
-	t_lst	*holder;
+	t_lst	*b_list;
+	int		len_of_a_list;
 
-	iter = *list;
-	*list = (*list)->next;
-	holder = *list;
-	while (holder -> next != NULL)
-		holder = holder -> next;
-	holder -> next = iter;
-	iter -> next = NULL;
-	write(1, "ra\n", 3);
+	len_of_a_list = ft_lst_size(a_list);
+	b_list = (t_lst *)malloc(len_of_a_list * sizeof(t_list));
+	
 }

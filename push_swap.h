@@ -6,7 +6,7 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:51:13 by muoz              #+#    #+#             */
-/*   Updated: 2023/12/27 02:52:29 by muoz             ###   ########.fr       */
+/*   Updated: 2023/12/29 22:07:54 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ char	**ft_split(char *str, t_lst *list_a);
 long	ft_atol(char *str, t_lst *list_a, int check, long result);
 int		ft_is_dup(t_lst *list_a);
 void	ft_lst_free(t_lst *list_a);
+int		ft_lst_size(t_lst *lst_x);
 
 #endif
