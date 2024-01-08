@@ -6,11 +6,23 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 18:04:41 by muoz              #+#    #+#             */
-/*   Updated: 2023/12/27 10:34:01 by muoz             ###   ########.fr       */
+/*   Updated: 2024/01/08 09:21:04 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void liste_yazdir(t_lst *de, char *str)
+{
+	t_lst *iter2 = de;
+	printf("\n%s\n", str);
+	while (iter2 != NULL)
+	{
+		printf("data: %d\ndataindex: %d\n\n", iter2->data, iter2->index);
+		iter2 = iter2->next;
+	}
+	printf("\n\n");
+}
 
 int	main(int ac, char **av)
 {
@@ -21,26 +33,34 @@ int	main(int ac, char **av)
 
 	list_a = NULL;
 	split_layer = 0;
-	av_counter = 0;
+	av_counter = 0; // ac = 4
 	while (++av_counter < ac)
 	{
 		ret_of_split = ft_split(av[av_counter], list_a);
 		while (ret_of_split[split_layer])
 		{
-			ft_lstadd(&list_a,
-				ft_atol(ret_of_split[split_layer], list_a, 0, 0));
+			ft_lstadd(&list_a, ft_atol(ret_of_split[split_layer], list_a, 0, 0));
 			free(ret_of_split[split_layer]);
 			split_layer++;
 		}
 		split_layer = 0;
 	}
+
 	if (ft_is_dup(list_a))
 		ft_lst_free(list_a);
-	// ft_sort_algoritma(); //burada lstyi çek ve koy
-	while (list_a != NULL)
-	{
-		printf("%d\n", list_a->data);
-		list_a = list_a->next;
-	}
+	ft_index_sort(list_a);
+	// while (list_a != NULL)
+	// {
+	// 	printf("index_sort: %d\n", list_a->index);
+	// 	list_a = list_a->next;
+	// }
+	ft_sort(list_a); //burada lstyi çek ve koy
+
+	// liste_yazdir(list_a, "A stack");
+	// while (list_a != NULL)
+	// {
+	// 	printf("after_sort: %d\n", list_a->data);
+	// 	list_a = list_a->next;
+	// }
 	return (0);
 }

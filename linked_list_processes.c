@@ -6,7 +6,7 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:47:33 by muoz              #+#    #+#             */
-/*   Updated: 2023/12/29 22:10:16 by muoz             ###   ########.fr       */
+/*   Updated: 2024/01/08 03:52:40 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_lstadd(t_lst **list, int a)
 
 	node = (t_lst *)malloc(sizeof(t_lst));
 	node->data = a;
+	node->index = -1;
 	node->next = NULL;
 	if (*list == NULL)
 		*list = node;
@@ -54,10 +55,23 @@ int	ft_lst_size(t_lst *lst_x)
 
 	i = 0;
 	iter = lst_x;
-	while (iter->next != NULL )
+	while (iter != NULL )
 	{
 		i++;
 		iter = iter->next;
 	}
 	return (i);
+}
+
+t_lst	*get_lst_bottom(t_lst *stack)
+{
+	while (stack && stack->next != NULL)
+		stack = stack->next;
+	return (stack);
+}
+t_lst	*get_lst_before_bottom(t_lst *stack)
+{
+	while (stack && stack->next && stack->next->next != NULL)
+		stack = stack->next;
+	return (stack);
 }

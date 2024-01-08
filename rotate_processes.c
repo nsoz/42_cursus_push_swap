@@ -6,45 +6,39 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:43:22 by muoz              #+#    #+#             */
-/*   Updated: 2023/12/29 21:43:23 by muoz             ###   ########.fr       */
+/*   Updated: 2024/01/05 18:13:23 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate_a(t_lst **list)
+static void	rotate(t_lst **stack)
 {
-	t_lst	*iter;
-	t_lst	*holder;
+	t_lst	*tmp;
+	t_lst	*tail;
 
-	iter = *list;
-	*list = (*list)->next;
-	holder = *list;
-	while (holder -> next != NULL)
-		holder = holder -> next;
-	holder -> next = iter;
-	iter -> next = NULL;
+	tmp = *stack;
+	*stack = (*stack)->next;
+	tail = get_lst_bottom(*stack);
+	tmp->next = NULL;
+	tail->next = tmp;
+}
+
+void	do_ra(t_lst **stack_a)
+{
+	rotate(stack_a);
 	write(1, "ra\n", 3);
 }
 
-void	rotate_b(t_lst **list)
+void	do_rb(t_lst **stack_b)
 {
-	t_lst	*iter;
-	t_lst	*holder;
-
-	iter = *list;
-	*list = (*list)->next;
-	holder = *list;
-	while (holder->next != NULL)
-		holder = holder -> next;
-	holder -> next = iter;
-	iter -> next = NULL;
+	rotate(stack_b);
 	write(1, "rb\n", 3);
 }
 
-void	rotate_both_of_them(t_lst **a_list, t_lst **b_list)
+void	do_rr(t_lst **stack_a, t_lst **stack_b)
 {
-	rotate_a(&*a_list);
-	rotate_b(&*b_list);
+	rotate(stack_a);
+	rotate(stack_b);
 	write(1, "rr\n", 3);
 }
