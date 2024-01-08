@@ -6,7 +6,7 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:51:13 by muoz              #+#    #+#             */
-/*   Updated: 2024/01/08 03:56:27 by muoz             ###   ########.fr       */
+/*   Updated: 2024/01/08 17:27:30 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ long	ft_atol(char *str, t_lst *list_a, int check, long result);
 int		ft_is_dup(t_lst *list_a);
 void	ft_lst_free(t_lst *list_a);
 int		ft_lst_size(t_lst *lst_x);
-void	ft_sort(t_lst *a_list);
+t_lst*	ft_sort(t_lst *a_list);
 t_lst	*get_lst_bottom(t_lst *stack);
 void	do_rra(t_lst **stack_a);
 void	do_rrb(t_lst **stack_b);

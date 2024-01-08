@@ -6,7 +6,7 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 18:04:41 by muoz              #+#    #+#             */
-/*   Updated: 2024/01/08 09:21:04 by muoz             ###   ########.fr       */
+/*   Updated: 2024/01/08 18:11:11 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 void liste_yazdir(t_lst *de, char *str)
 {
+	t_lst *iter1 = de;
+	int size = 0;
+	while (iter1 != NULL)
+	{
+		size++;
+		iter1 = iter1->next;
+	}
 	t_lst *iter2 = de;
 	printf("\n%s\n", str);
 	while (iter2 != NULL)
@@ -21,7 +28,7 @@ void liste_yazdir(t_lst *de, char *str)
 		printf("data: %d\ndataindex: %d\n\n", iter2->data, iter2->index);
 		iter2 = iter2->next;
 	}
-	printf("\n\n");
+	printf("list size: %d\n", size);
 }
 
 int	main(int ac, char **av)
@@ -49,14 +56,15 @@ int	main(int ac, char **av)
 	if (ft_is_dup(list_a))
 		ft_lst_free(list_a);
 	ft_index_sort(list_a);
+	t_lst *new;
+	new = ft_sort(list_a);
+	// printf("\n----------------------------------\n");
+	// liste_yazdir(new, "new_stack");
 	// while (list_a != NULL)
 	// {
 	// 	printf("index_sort: %d\n", list_a->index);
 	// 	list_a = list_a->next;
 	// }
-	ft_sort(list_a); //burada lstyi çek ve koy
-
-	// liste_yazdir(list_a, "A stack");
 	// while (list_a != NULL)
 	// {
 	// 	printf("after_sort: %d\n", list_a->data);
