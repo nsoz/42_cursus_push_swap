@@ -1,181 +1,109 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 22:07:19 by muoz              #+#    #+#             */
-/*   Updated: 2024/01/08 19:21:27 by muoz             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
-// en büyüğü en baştamı kontrolü yapan bir fonksiyon yap
-int	ft_is_first_max(t_lst *b_list)
+int ft_find_closest(t_lst *list, int aforementioned)
 {
-	if (b_list == NULL) 
-        return 0;
-	t_lst	*iter;
-	int		high;
-
-	high = b_list->index;
-	iter = b_list;
-	while (iter)
+    t_lst *iter;
+	int	distance;
+// 1 2 3 4 5 9 6 8 7 
+    iter = list;
+	distance = 0;
+    while (iter != NULL)
 	{
-		if(iter->index > high)
-			break;
+		if (aforementioned > iter->index)
+			if (iter->index > distance)
+				distance = iter->index;
+        iter = iter->next;
+    }
+	printf("aff: %d, dist: %d\n", aforementioned, distance);
+	return (distance);
+}
+
+
+int	ft_find_index(t_lst *list, int aforementioned) // blist 2
+{
+	int i;
+	t_lst *iter;
+
+	i = 1;
+	iter = list;
+	while (iter != NULL && iter->index != aforementioned)
+	{
 		iter = iter->next;
+		i++;
 	}
 	if (iter == NULL)
-		return (0);
-	else
-		return (1);
+		return(ft_find_index(list, ft_find_closest(list, (aforementioned))));
+	return (i);
 }
 
-void	ft_sort_descending_order(t_lst **b_list)
-{
-	if (b_list == NULL || *b_list == NULL)
-    	return;
-	t_lst	**iter;
 
-	iter = b_list;
-	//b lsitin en büyük datası ilkinde değilse while giren bir if bloğu yap
-	if (ft_is_first_max(*b_list))
-		while (iter != NULL && (*iter)->next != NULL && (*iter)->index < (*iter)->next->index)
-		{
-			do_rb(b_list);
-			iter = &(*b_list);
-		}
+int	ft_calculate_in_list(int index, t_lst *list, int len)// 2 blist 3
+{
+	int i;
+	int distance;
+
+	i = ft_find_index(list, index);// blsit 2 i = 2
+	distance = (len - i) + 1;//dis = 1
+	if (distance < i)
+		return (distance);// 1döndü
+	// else if(distance == 0)
+	// 	return (1);
 	else
-		return;
-	liste_yazdir((* b_list), "B LİSTESİ DİZAYN EDİLDİ:");
+		return (i - 1);
 }
 
-// bu kodda index sorunun var geçmesi gereken indexe geçebilmek için fazladan reverse işlemi yapıyor
-void	ft_preparation_to_push(t_lst **a_list, int minest, int len)
+int	ft_cost_filler(int index, t_lst *b_list, t_lst *a_list, int len)//3 blist alist 3
 {
-	// write(1, "before_pre :", 12);
-	// liste_yazdir(*a_list, "A LİST");
-	int	distance;
-	if (minest == -2)
-		return ;
-	distance = len - minest;
-	if (distance < minest)
-		while (distance != -1)
-		{
-			do_rra(&(*a_list));
-			distance--;
-		}
-	else
-	{
-		int asd = 0;
-		while (minest != 0)
-		{
-			asd++;
-			do_ra(&(*a_list));
-			minest--;
-		}
-	}	
+	                        //      3     alist   3                                   2         b       3
+	return ((ft_calculate_in_list(index, a_list, len) + 1) + ft_calculate_in_list((index - 1), b_list, len));
 }
 
-int	ft_find_minest_index(t_lst *a_list)
+int	*ft_cost_calculate(t_lst *a_list, t_lst *b_list, int len)
 {
-	int		min;
-	int		min_index;
+	int *cost_of_ret;
 	t_lst	*iter;
+	int i;
 
-	min_index = 0;
-	min = 2147483647;
+	i = 0;
 	iter = a_list;
-	while (iter != NULL)
+	cost_of_ret = (int *)malloc(len * sizeof(int));
+	while (len > i)
 	{
-		if (iter->data < min)
-			min = iter->data;
+		cost_of_ret[i] = ft_cost_filler(iter->index, b_list, a_list, len);//3 ,b, a, 3  
 		iter = iter->next;
+		i++;
 	}
-	iter = a_list;
-	while (iter != NULL)
-	{
-		if (iter->data == min)
-			return (min_index);
-		min_index++;
-		iter = iter->next;
-	}
-	return (-1);
+	return (cost_of_ret);
 }
 
-int	algorithm_simulation(t_lst *a_list, t_lst *b_list)
+void	int_arr_yazdır(int *arr, int len)
 {
-	int		index;
-	int		minest;
-	int		minindex;
-	t_lst	*iter;
-	int		min;
-
-	min = 2147483647;
-	iter = a_list;
-	minest = b_list->data;
-	index = 0;
-	minindex = -1;
-	if (a_list)
-	{
-		if (ft_lst_size(a_list) == 1)
-			return (1);
-		while (iter->next != NULL)
-		{
-			if (b_list->index < iter->index)
-			{
-				minest = iter->index - b_list->index;
-				if (min > minest)
-				{
-					min = minest;
-					minindex = index;
-				}
-			}
-			iter = iter->next;
-			index++;
-		}
-	}
-	if (minindex == -1)
-		return (ft_find_minest_index(a_list));
-	return (minindex);
+	int i=-1;
+	while (++i < len)
+		printf(">>>>%d", arr[i]);
+	printf("\n");
 }
 
-t_lst*	ft_sort(t_lst *a_list)
+t_lst	*ft_sort(t_lst *a_list)
 {
 	t_lst	*b_list;
-	int		len_of_list;
-	int		minest_index;
+	int		*cost_of_index;
+	int		len;
 
 	b_list = NULL;
-
 	do_pb(&a_list, &b_list);
-	do_pb(&a_list, &b_list); 
-	// ft_sort_descending_order(&b_list);
-	// len_of_list = ft_lst_size(a_list);
-	
-	while (1)
+	do_pb(&a_list, &b_list);
+	len = ft_lst_size(a_list);
+	// liste_yazdir(b_list, "B LİSTESİNE İLK İKİ DÜĞÜM EKLENDİ"); // kontrol edildi 
+	while(len)
 	{
-		ft_sort_descending_order(&b_list);
-		minest_index = algorithm_simulation(a_list, b_list);
-		if (minest_index == -1)	
-			break ;
-		ft_preparation_to_push(&a_list, minest_index, ft_lst_size(a_list));
-		do_pb(&a_list, &b_list);
+		cost_of_index = ft_cost_calculate(a_list, b_list, len);
+		int_arr_yazdır(cost_of_index, len);
+		// ft_processes(a_list, b_list, cost_of_index, len);
+		free(cost_of_index);
+		len--;
 	}
-	len_of_list = ft_lst_size(b_list);
-	while (len_of_list--)
-		do_pa(&a_list, &b_list);
-
-
-
-
-
-	printf("------------------------\n");
-	liste_yazdir(b_list, "B LİSTENİN SORTTAKİ SON HALİ");
-	liste_yazdir(a_list, "A LİSTENİN SORTTAKİ SON HALİ");
-	printf("------------------------\n");
-	return (a_list);
+	//kapanmadan hemen önce free(const_of_index);
+	//while kapanacak
+	return(0);
 }

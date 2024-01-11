@@ -6,7 +6,7 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 18:04:41 by muoz              #+#    #+#             */
-/*   Updated: 2024/01/08 18:11:11 by muoz             ###   ########.fr       */
+/*   Updated: 2024/01/11 15:37:43 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int ac, char **av)
 	if (ft_is_dup(list_a))
 		ft_lst_free(list_a);
 	ft_index_sort(list_a);
+	// liste_yazdir(list_a, "ARGÜMANLAR A LİSTEYE EKLENDİ");
 	t_lst *new;
 	new = ft_sort(list_a);
 	// printf("\n----------------------------------\n");
