@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int ft_find_closest(t_lst *list, int aforementioned)
+int ft_find_closest(t_lst *list, int aforementioned) ///kendinden küçük en yakın datayı gösterir ama kendinden küçük yoksa kendinden büyük en küçük datayı vermeli
 {
     t_lst *iter;
 	int	distance;
@@ -14,7 +14,19 @@ int ft_find_closest(t_lst *list, int aforementioned)
 				distance = iter->index;
         iter = iter->next;
     }
-	printf("aff: %d, dist: %d\n", aforementioned, distance);
+	if ((iter == NULL) && (distance == 0)) //kendinden büyük en küçük indexi bul
+	{
+		iter = list;
+		while (iter != NULL)
+		{
+			distance = 2147483647;
+			if (aforementioned < iter->index)
+				if (iter->index < distance)
+					distance = iter->index;
+			iter = iter->next;
+		}
+	}
+	// printf("aff: %d, dist: %d\n", aforementioned, distance);
 	return (distance);
 }
 
@@ -43,7 +55,7 @@ int	ft_calculate_in_list(int index, t_lst *list, int len)// 2 blist 3
 	int distance;
 
 	i = ft_find_index(list, index);// blsit 2 i = 2
-	distance = (len - i) + 1;//dis = 1
+	distance = (len - i);//dis = 1
 	if (distance < i)
 		return (distance);// 1döndü
 	// else if(distance == 0)
@@ -90,11 +102,12 @@ t_lst	*ft_sort(t_lst *a_list)
 	int		*cost_of_index;
 	int		len;
 
+	liste_yazdir(a_list, "a LİSTESİ");
 	b_list = NULL;
 	do_pb(&a_list, &b_list);
 	do_pb(&a_list, &b_list);
 	len = ft_lst_size(a_list);
-	// liste_yazdir(b_list, "B LİSTESİNE İLK İKİ DÜĞÜM EKLENDİ"); // kontrol edildi 
+	liste_yazdir(b_list, "B LİSTESİNE İLK İKİ DÜĞÜM EKLENDİ"); // kontrol edildi 
 	while(len)
 	{
 		cost_of_index = ft_cost_calculate(a_list, b_list, len);
