@@ -6,7 +6,7 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 18:04:41 by muoz              #+#    #+#             */
-/*   Updated: 2024/01/11 15:37:43 by muoz             ###   ########.fr       */
+/*   Updated: 2024/01/17 03:35:29 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int ac, char **av)
 
 	list_a = NULL;
 	split_layer = 0;
-	av_counter = 0; // ac = 4
+	av_counter = 0;
 	while (++av_counter < ac)
 	{
 		ret_of_split = ft_split(av[av_counter], list_a);
@@ -56,20 +56,7 @@ int	main(int ac, char **av)
 	if (ft_is_dup(list_a))
 		ft_lst_free(list_a);
 	ft_index_sort(list_a);
-	// liste_yazdir(list_a, "ARGÜMANLAR A LİSTEYE EKLENDİ");
 	t_lst *new;
 	new = ft_sort(list_a);
-	// printf("\n----------------------------------\n");
-	// liste_yazdir(new, "new_stack");
-	// while (list_a != NULL)
-	// {
-	// 	printf("index_sort: %d\n", list_a->index);
-	// 	list_a = list_a->next;
-	// }
-	// while (list_a != NULL)
-	// {
-	// 	printf("after_sort: %d\n", list_a->data);
-	// 	list_a = list_a->next;
-	// }
 	return (0);
 }
