@@ -24,7 +24,7 @@ int	ft_is_sorted_low(t_lst *b_list)
 	// print_list(iter);
 	while (iter->next != NULL)
 	{
-		if (iter->index > iter->next->index)
+		if (iter->index < iter->next->index)
 			iter = iter->next;
 		else
 			break;
@@ -74,13 +74,16 @@ t_lst	*ft_sort(t_lst *a_list)
 	do_pb(&a_list, &b_list);
 	do_pb(&a_list, &b_list); //first_push fonksiyonu yazabilirsin
 	len_a = ft_lst_size(a_list);
+	// printf("kadar gör%d\n", len_a);
 	while(len_a)
 	{
 		minest_costs_index_in_lst = ft_find_index(a_list, ft_cost_calculate(a_list, b_list, len_a));
 		ft_processes(&a_list, &b_list, minest_costs_index_in_lst, len_a);
 		do_pb(&a_list, &b_list);
+		// liste_yazdir(b_list, "blistesi döngüden önce");
 		len_a--;
 	}
+	// liste_yazdir(b_list, "blist son");
 	while (ft_is_sorted_low(b_list))
 	{
 		if (ft_closer_to_start_or_end(ft_find_highest(b_list), b_list, ft_lst_size(b_list)))
