@@ -6,7 +6,7 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:51:13 by muoz              #+#    #+#             */
-/*   Updated: 2024/01/17 15:59:10 by muoz             ###   ########.fr       */
+/*   Updated: 2024/02/01 18:32:38 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_index_sort(t_lst	*a_list);
 int		ft_find_relevants_index(t_lst *a_list, int relevant);
 int 	ft_find_closest(t_lst *list, int aforementioned, int distance);
 int		ft_find_index(t_lst *list, int aforementioned);
+int	ft_find_lowest(t_lst *list);
 int		ft_calculate_in_list(int index, t_lst *list, int len);
 void	ft_processes_design(int *directory, t_lst **a_list, t_lst **b_list);
 void	ft_processes(t_lst **a_list, t_lst **b_list, int prophet_index, int len_a);

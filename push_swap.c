@@ -6,7 +6,7 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 18:04:41 by muoz              #+#    #+#             */
-/*   Updated: 2024/01/20 02:40:12 by muoz             ###   ########.fr       */
+/*   Updated: 2024/02/01 19:34:04 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	main(int ac, char **av)
 	if (ft_is_dup(list_a))
 		ft_lst_free(list_a);
 	ft_index_sort(list_a);
-	t_lst *new;
-	new = ft_sort(list_a);
+	ft_sort(list_a);
 	return (0);
 }

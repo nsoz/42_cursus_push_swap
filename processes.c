@@ -39,7 +39,7 @@ void	ft_processes(t_lst **a_list, t_lst **b_list, int prophet_index, int len_a)
 	// printf("/n/////////////n");
 	// printf(">RA>>>%d\n", directory[REPEAT_A]);
 	// printf("\n********\n");
-	directory[REPEAT_B] = ft_calculate_in_list((aforementioned_index + 1), *b_list, ft_lst_size(*b_list));  //repeat_b
+	directory[REPEAT_B] = ft_calculate_in_list((aforementioned_index - 1), *b_list, ft_lst_size(*b_list));  //repeat_b
 	// printf("\n********\n");
 	// printf(">RB>>>%d\n", directory[REPEAT_B]);
 	directory[FLAG_FOR_A] = ft_rev_or_rotate(prophet_index, len_a);   //flag_for_a

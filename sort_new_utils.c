@@ -73,13 +73,13 @@ int ft_find_closest(t_lst *list, int aforementioned, int distance)
     iter = list;
 	while (iter != NULL)
 	{
-		if (aforementioned <= iter->index)
-			if (iter->index < distance)
+		if (aforementioned >= iter->index)
+			if (iter->index > distance)
 				distance = iter->index;
         iter = iter->next;
     }
-	if ((iter == NULL) && (distance == 1110))
-		return (ft_find_lowest(list));
+	if ((iter == NULL) && (distance == 0))
+		return (ft_find_highest(list));
 	return (distance);
 }
 
@@ -100,7 +100,7 @@ int	ft_find_index(t_lst *list, int aforementioned)
 		i++;
 	}
 	if (iter == NULL)
-		return(ft_find_index(list, ft_find_closest(list, (aforementioned), 1110)));
+		return(ft_find_index(list, ft_find_closest(list, (aforementioned), 0)));
 	return (i);
 }
 

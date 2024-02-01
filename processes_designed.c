@@ -115,7 +115,6 @@ void	ft_processes_design_revrotate(int *directory, t_lst **list, int listname)
 
 void	ft_processes_design(int *directory, t_lst **a_list, t_lst **b_list)
 {
-	
 	if (directory[FLAG_FOR_A] == 2 && directory[FLAG_FOR_B] == 2)
 		ft_processes_design_for_rev(directory, a_list, b_list);
 	else if (directory[FLAG_FOR_A] == 1 && directory[FLAG_FOR_B] == 1)
