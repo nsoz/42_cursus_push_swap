@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_processes.c                                   :+:      :+:    :+:   */
+/*   sort_for_to.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 21:41:15 by muoz              #+#    #+#             */
-/*   Updated: 2024/02/13 23:30:15 by muoz             ###   ########.fr       */
+/*   Created: 2024/02/12 03:08:40 by muoz              #+#    #+#             */
+/*   Updated: 2024/02/15 19:55:25 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push(t_lst **src, t_lst **dest)
+void	ft_sort_for_to(t_lst *a_list)
 {
-	t_lst	*tmp;
+	t_lst	*iter;
 
-	if (*src == NULL)
-		return ;
-	tmp = (*src)->next;
-	(*src)->next = *dest;
-	*dest = *src;
-	*src = tmp;
-}
-
-void	do_pa(t_lst **stack_a, t_lst **stack_b)
-{
-	push(stack_b, stack_a);
-	write(1, "pa\n", 3);
-}
-
-void	do_pb(t_lst **stack_a, t_lst **stack_b)
-{
-	push(stack_a, stack_b);
-	write(1, "pb\n", 3);
+	iter = a_list;
+	if (iter->index > iter->next->index)
+		swap_a(a_list);
+	ft_lst_free(a_list, 1);
 }

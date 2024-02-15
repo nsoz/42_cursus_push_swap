@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_processes.c                                   :+:      :+:    :+:   */
+/*   sort_for_four.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 21:41:15 by muoz              #+#    #+#             */
-/*   Updated: 2024/02/13 23:30:15 by muoz             ###   ########.fr       */
+/*   Created: 2024/02/12 03:08:19 by muoz              #+#    #+#             */
+/*   Updated: 2024/02/15 21:53:08 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push(t_lst **src, t_lst **dest)
+void	ft_get_top(t_lst **a_lst, int lowest)
 {
-	t_lst	*tmp;
+	t_lst	*iter;
 
-	if (*src == NULL)
-		return ;
-	tmp = (*src)->next;
-	(*src)->next = *dest;
-	*dest = *src;
-	*src = tmp;
+	iter = *a_lst;
+	while (iter != NULL && iter->index != lowest)
+	{
+		do_ra(&*a_lst);
+		iter = iter->next;
+	}
 }
 
-void	do_pa(t_lst **stack_a, t_lst **stack_b)
+void	ft_sort_for_fr(t_lst *a_list)
 {
-	push(stack_b, stack_a);
-	write(1, "pa\n", 3);
-}
+	int		smalest;
+	t_lst	*b_list;
 
-void	do_pb(t_lst **stack_a, t_lst **stack_b)
-{
-	push(stack_a, stack_b);
-	write(1, "pb\n", 3);
+	b_list = NULL;
+	smalest = ft_find_smalest(a_list);
+	ft_get_top(&a_list, smalest);
+	do_pb(&a_list, &b_list);
+	ft_sort_for_tw(&a_list, 1);
+	do_pa(&a_list, &b_list);
+	ft_lst_free(a_list, 1);
 }

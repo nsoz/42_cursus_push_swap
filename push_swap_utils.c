@@ -6,7 +6,7 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:49:10 by muoz              #+#    #+#             */
-/*   Updated: 2023/12/29 21:49:58 by muoz             ###   ########.fr       */
+/*   Updated: 2024/02/15 19:55:54 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*fill(char *str, int index, t_lst *list_a)
 		ret_index++;
 	}
 	if (check_digits)
-		ft_lst_free(list_a);
+		ft_lst_free(list_a, 2);
 	ret[ret_index] = '\0';
 	return (ret);
 }
@@ -120,9 +120,9 @@ long	ft_atol(char *str, t_lst *list_a, int check, long result)
 		str++;
 		if ((result * sign) > 2147483647
 			|| (result * sign) < -2147483648 || check > 1)
-			ft_lst_free(list_a);
+			ft_lst_free(list_a, 2);
 	}
 	if (*str && (*str != ' ' && *str != '	'))
-		ft_lst_free(list_a);
+		ft_lst_free(list_a, 2);
 	return (result * sign);
 }

@@ -6,7 +6,7 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:47:33 by muoz              #+#    #+#             */
-/*   Updated: 2024/01/17 01:47:55 by muoz             ###   ########.fr       */
+/*   Updated: 2024/02/15 21:56:32 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_lstadd(t_lst **list, int a)
 	}
 }
 
-void	ft_lst_free(t_lst *list_a)
+void	ft_lst_free(t_lst *list_a, int flag)
 {
 	t_lst	*iter;
 
@@ -44,8 +44,11 @@ void	ft_lst_free(t_lst *list_a)
 		list_a = list_a->next;
 		free(iter);
 	}
-	write(1, "Error", 5);
-	exit (1);
+	if (flag == 2)
+	{
+		write(1, "Error", 5);
+		exit (1);
+	}
 }
 
 int	ft_lst_size(t_lst *lst_x)
@@ -69,6 +72,7 @@ t_lst	*get_lst_bottom(t_lst *stack)
 		stack = stack->next;
 	return (stack);
 }
+
 t_lst	*get_lst_before_bottom(t_lst *stack)
 {
 	while (stack && stack->next && stack->next->next != NULL)

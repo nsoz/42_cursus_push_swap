@@ -6,13 +6,13 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:58:33 by muoz              #+#    #+#             */
-/*   Updated: 2024/01/16 19:58:34 by muoz             ###   ########.fr       */
+/*   Updated: 2024/02/11 23:21:30 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_find_smalest(t_lst	*a_list)
+int	ft_find_smalest(t_lst	*a_list)
 {
 	t_lst	*iter;
 	int		minest;
@@ -28,16 +28,16 @@ int		ft_find_smalest(t_lst	*a_list)
 	return (minest);
 }
 
-int		ft_find_smalest_without_minest(t_lst	*a_list, int minest_holder)
+int	ft_find_smalest_without_minest(t_lst	*a_list, int minest_holder)
 {
 	t_lst	*iter;
-	int		minest = 2147483647;
-	
+	int		minest;
+
+	minest = 2147483647;
 	iter = a_list;
 	if (iter != NULL && iter->data == minest_holder)
 		iter = iter->next;
-	
-	while(iter != NULL)
+	while (iter != NULL)
 	{
 		if (iter->data < minest_holder)
 			iter = iter->next;
@@ -72,9 +72,10 @@ int	ft_find_relevant_index(t_lst *a_list, int relevant)
 	return (-1);
 }
 
-void	ft_index_changer(t_lst *a_list,	int	minest_index, int sorted_index)
+void	ft_index_changer(t_lst *a_list,	int minest_index, int sorted_index)
 {
 	t_lst	*iter;
+
 	iter = a_list;
 	while (minest_index)
 	{
@@ -82,15 +83,16 @@ void	ft_index_changer(t_lst *a_list,	int	minest_index, int sorted_index)
 		minest_index--;
 	}
 	iter->index = sorted_index;
-	return;
 }
 
 void	ft_index_sort(t_lst	*a_list)
 {
 	t_lst	*iter;
-	int	sorted_index = 1;
+	int		sorted_index;
 	int		minest;
 	int		index;
+
+	sorted_index = 1;
 	iter = a_list;
 	minest = ft_find_smalest(a_list);
 	index = ft_find_relevant_index(a_list, minest);

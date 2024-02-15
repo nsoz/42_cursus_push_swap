@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   processes_designed.c                               :+:      :+:    :+:   */
+/*   process_design_for_b.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 02:40:50 by muoz              #+#    #+#             */
-/*   Updated: 2024/02/13 23:29:48 by muoz             ###   ########.fr       */
+/*   Created: 2024/02/11 23:34:44 by muoz              #+#    #+#             */
+/*   Updated: 2024/02/13 23:29:22 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_proces_rotate(int *directory, t_lst **male_list, t_lst **female_list)
+void	ft_proces_rot_b(int *directory, t_lst **male_list, t_lst **female_list)
 {
 	int	repeat;
 	int	rest;
@@ -25,7 +25,7 @@ void	ft_proces_rotate(int *directory, t_lst **male_list, t_lst **female_list)
 		while (repeat--)
 			do_rr(male_list, female_list);
 		while (rest--)
-			do_ra(male_list);
+			do_ra(female_list);
 	}
 	else
 	{
@@ -40,7 +40,7 @@ void	ft_proces_rotate(int *directory, t_lst **male_list, t_lst **female_list)
 	}
 }
 
-void	ft_proces_flex(int *directory, t_lst **male_list, t_lst **female_list)
+void	ft_proces_flex_b(int *directory, t_lst **male_list, t_lst **female_list)
 {
 	int	repeat_for_a;
 	int	repeat_for_b;
@@ -49,23 +49,25 @@ void	ft_proces_flex(int *directory, t_lst **male_list, t_lst **female_list)
 	{
 		repeat_for_a = directory[REPEAT_A];
 		while (repeat_for_a--)
-			do_ra(male_list);
+			do_ra(female_list);
 		repeat_for_b = directory[REPEAT_B];
 		while (repeat_for_b--)
-			do_rrb(female_list);
+			do_rrb(male_list);
 	}
 	else
 	{
 		repeat_for_a = directory[REPEAT_A];
 		while (repeat_for_a--)
-			do_rra(male_list);
+			do_rra(female_list);
 		repeat_for_b = directory[REPEAT_B];
 		while (repeat_for_b--)
-			do_rb(female_list);
+		{
+			do_rb(male_list);
+		}
 	}
 }
 
-void	ft_processes_design_rotate(int *directory, t_lst **list, int listname)
+void	ft_processes_design_rotate_b(int *directory, t_lst **list, int listname)
 {
 	int	repeat;
 
@@ -83,7 +85,7 @@ void	ft_processes_design_rotate(int *directory, t_lst **list, int listname)
 	}
 }
 
-void	ft_processes_design_revrot(int *directory, t_lst **list, int listname)
+void	ft_proces_revrot_b(int *directory, t_lst **list, int listname)
 {
 	int	repeat;
 
@@ -101,25 +103,20 @@ void	ft_processes_design_revrot(int *directory, t_lst **list, int listname)
 	}
 }
 
-void	ft_processes_design(int *dir, t_lst **male, t_lst **fmale, int flag)
+void	ft_proces_des_b(int *directory, t_lst **male_list, t_lst **female_list)
 {
-	if (flag == 1)
-	{
-		if (dir[FLAG_FOR_A] == 2 && dir[FLAG_FOR_B] == 2)
-			ft_proces_rev(dir, male, fmale);
-		else if (dir[FLAG_FOR_A] == 1 && dir[FLAG_FOR_B] == 1)
-			ft_proces_rotate(dir, male, fmale);
-		else if (dir[FLAG_FOR_A] != 0 && dir[FLAG_FOR_B] != 0)
-			ft_proces_flex(dir, male, fmale);
-		else if (dir[FLAG_FOR_A] == 1)
-			ft_processes_design_rotate(dir, male, 'a');
-		else if (dir[FLAG_FOR_A] == 2)
-			ft_processes_design_revrot(dir, male, 'a');
-		else if (dir[FLAG_FOR_B] == 1)
-			ft_processes_design_rotate(dir, fmale, 'b');
-		else
-			ft_processes_design_revrot(dir, fmale, 'b');
-	}
+	if (directory[FLAG_FOR_A] == 2 && directory[FLAG_FOR_B] == 2)
+		ft_proces_rev_b(directory, male_list, female_list);
+	else if (directory[FLAG_FOR_A] == 1 && directory[FLAG_FOR_B] == 1)
+		ft_proces_rot_b(directory, male_list, female_list);
+	else if (directory[FLAG_FOR_A] != 0 && directory[FLAG_FOR_B] != 0)
+		ft_proces_flex_b(directory, male_list, female_list);
+	else if (directory[FLAG_FOR_A] == 1)
+		ft_processes_design_rotate_b(directory, female_list, 'a');
+	else if (directory[FLAG_FOR_A] == 2)
+		ft_proces_revrot_b(directory, female_list, 'a');
+	else if (directory[FLAG_FOR_B] == 1)
+		ft_processes_design_rotate_b(directory, male_list, 'b');
 	else
-		ft_proces_des_b(dir, male, fmale);
+		ft_proces_revrot_b(directory, male_list, 'b');
 }

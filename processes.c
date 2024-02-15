@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   processes.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/12 03:12:12 by muoz              #+#    #+#             */
+/*   Updated: 2024/02/13 23:29:29 by muoz             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	ft_rev_or_rotate(int prophet_index, int len)
 {
+	int	distance;
+
 	if (len == 1)
 		return (0);
-	int distance;
-
 	distance = len - prophet_index;
 	if (distance < prophet_index)
-		return(2); //rev
+		return (2);
 	else
-		return(1); //rotate
+		return (1);
 }
 
 int	ft_finder(t_lst *a_list, int prophet_index_holder)
@@ -22,29 +34,48 @@ int	ft_finder(t_lst *a_list, int prophet_index_holder)
 	while (prophet_index_holder--)
 		iter = iter->next;
 	ret = iter->index;
-	return(ret);
+	return (ret);
 }
 
-void	ft_processes(t_lst **a_list, t_lst **b_list, int prophet_index, int len_a)
+void	ft_processes_next(t_lst **male, t_lst **female, int prophet, int flag)
 {
-	int	aforementioned_index;
+	int	afor;
+	int	len;
 	int	directory[4];
 
-	// if (prophet_index == -1)
-	// 	aforementioned_index = a_list->index;
-	aforementioned_index = ft_finder(*a_list, (prophet_index - 1));
-	// printf("affor: %d\n", aforementioned_index);
-	// printf("/n/////////////n");
-	directory[REPEAT_A] = ft_calculate_in_list(aforementioned_index, *a_list, len_a);   //repeat_a
-	// printf("/n/////////////n");
-	// printf(">RA>>>%d\n", directory[REPEAT_A]);
-	// printf("\n********\n");
-	directory[REPEAT_B] = ft_calculate_in_list((aforementioned_index - 1), *b_list, ft_lst_size(*b_list));  //repeat_b
-	// printf("\n********\n");
-	// printf(">RB>>>%d\n", directory[REPEAT_B]);
-	directory[FLAG_FOR_A] = ft_rev_or_rotate(prophet_index, len_a);   //flag_for_a
-	// printf(">FFA>>>%d\n", directory[FLAG_FOR_A]);
-	directory[FLAG_FOR_B] = ft_rev_or_rotate(ft_find_index(*b_list, (aforementioned_index + 1)), ft_lst_size(*b_list)); //flag_for_b
-	// printf(">FFB>>>%d\n", directory[FLAG_FOR_B]);
-	ft_processes_design(directory, a_list, b_list);
+	len = ft_lst_size(*male);
+	afor = ft_finder(*male, (prophet - 1));
+	directory[REPEAT_B] = ft_calculate_in_list
+		(afor, *male, len, 2);
+	directory[REPEAT_A] = ft_calculate_in_list
+		((afor + 1), *female,
+			ft_lst_size(*female), 2);
+	directory[FLAG_FOR_B] = ft_rev_or_rotate(prophet, len);
+	directory[FLAG_FOR_A] = ft_rev_or_rotate(
+			ft_find_index(*female, (afor + 1), 2),
+			ft_lst_size(*female));
+	ft_processes_design(directory, male, female, flag);
+}
+
+void	ft_processes(t_lst **male, t_lst **female, int prophet, int flag)
+{
+	int	afor;
+	int	len;
+	int	directory[4];
+
+	len = ft_lst_size(*male);
+	if (flag == 1)
+	{
+		afor = ft_finder(*male, (prophet - 1));
+		directory[REPEAT_A] = ft_calculate_in_list(afor, *male, len, 1);
+		directory[REPEAT_B] = ft_calculate_in_list((afor - 1), *female,
+				ft_lst_size(*female), 1);
+		directory[FLAG_FOR_A] = ft_rev_or_rotate(prophet, len);
+		directory[FLAG_FOR_B] = ft_rev_or_rotate(
+				ft_find_index(*female, (afor + 1), 1),
+				ft_lst_size(*female));
+		ft_processes_design(directory, male, female, flag);
+	}
+	else
+		ft_processes_next(male, female, prophet, flag);
 }
