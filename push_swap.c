@@ -6,7 +6,7 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 18:04:41 by muoz              #+#    #+#             */
-/*   Updated: 2024/02/15 23:07:46 by muoz             ###   ########.fr       */
+/*   Updated: 2024/02/15 23:15:27 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,5 @@ int	main(int ac, char **av)
 		split_layer = 0;
 	}
 	ft_pre_sort(list_a);
-	system("leaks push_swap");
 	return (0);
 }
