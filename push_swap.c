@@ -6,7 +6,7 @@
 /*   By: muoz <muoz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 18:04:41 by muoz              #+#    #+#             */
-/*   Updated: 2024/02/15 23:15:27 by muoz             ###   ########.fr       */
+/*   Updated: 2024/02/18 23:42:27 by muoz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int ac, char **av)
 	list_a = NULL;
 	split_layer = 0;
 	av_counter = 0;
-	while (++av_counter < ac && ac != 0)
+	while (++av_counter < ac && ac > 1)
 	{
 		ret_of_split = ft_split(av[av_counter], list_a);
 		while (ret_of_split[split_layer])
@@ -58,6 +58,7 @@ int	main(int ac, char **av)
 		free(ret_of_split);
 		split_layer = 0;
 	}
-	ft_pre_sort(list_a);
+	if (ac != 1)
+		ft_pre_sort(list_a);
 	return (0);
 }
